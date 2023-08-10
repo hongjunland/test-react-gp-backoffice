@@ -10,7 +10,7 @@ function App() {
         <Routes>
           <Route path="/" element={<HomePage/>}/>
           <Route path="/login" element={<LoginPage/>}/>
-          <Route path="/auth2/redirect" element={<RedirectPage/>}/>
+          {/* <Route path="/oauth2/redirect" element={<RedirectPage/>}/> */}
         </Routes>
       </BrowserRouter>
     </div>

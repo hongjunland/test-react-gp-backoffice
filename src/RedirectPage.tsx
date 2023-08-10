@@ -1,16 +1,18 @@
 import React, { useEffect } from 'react';
-import { useHistory } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 function CallbackComponent() {
-    const history = useHistory();
+    const navigate = useNavigate();
 
     useEffect(() => {
         // URL에서 인증 정보 추출
         const urlParams = new URLSearchParams(window.location.search);
-        const accessToken = urlParams.get('access_token');
-        const tokenType = urlParams.get('token_type');
-        const expiresIn = urlParams.get('expires_in');
-        const state = urlParams.get('state');
+        console.log(urlParams);
+        
+        const accessToken = urlParams.get('token');
+        // const tokenType = urlParams.get('token_type');
+        // const expiresIn = urlParams.get('expires_in');
+        // const state = urlParams.get('state');
 
         // TODO: `state` 검증
 
@@ -19,16 +21,16 @@ function CallbackComponent() {
             localStorage.setItem('accessToken', accessToken);
 
             // 메인 페이지로 리다이렉트
-            history.push('/');
+            navigate('/');
         } else {
             // 오류 처리
             const error = urlParams.get('error');
             const errorDescription = urlParams.get('error_description');
             console.error("OAuth2 error:", error, errorDescription);
             // 오류 페이지로 리다이렉트 또는 사용자에게 알림
-            history.push('/error');
+            navigate('/error');
         }
-    }, [history]);
+    }, [navigate]);
 
     return (
         <div>
